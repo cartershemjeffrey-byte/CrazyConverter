@@ -115,7 +115,7 @@ async function loadFFmpeg() {
       console.log(message)
     })
 
-    const baseURL = '/ffmpeg-core'
+    const baseURL = `${import.meta.env.BASE_URL}ffmpeg-core`
 
     await ffmpeg.load({
       coreURL: await toBlobURL(
