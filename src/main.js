@@ -315,6 +315,7 @@ const workspaceMarkup = `
     <div class="tool-panel-head"><div><h3>Image Lab</h3><p>Convert common image formats using your browser's image engine.</p></div><span class="tool-pill">On-device</span></div>
     <label class="tool-label" for="image-file">Choose an image</label>
     <input id="image-file" class="tool-input" type="file" accept="image/*,.avif,.gif" multiple>
+    <div id="image-file-list" class="image-file-list"></div>
     <div id="image-preview-wrap" class="image-preview-wrap" hidden><img id="image-preview" alt="Selected image preview"><span id="image-dimensions"></span></div>
     
     <div class="tool-controls">
@@ -394,8 +395,12 @@ let selectedImages = []
 const imageFileList = document.querySelector('#image-file-list')
 
 function renderImageFileList(files) {
-  imageFileList.innerHTML = ''
+  if (!imageFileList) {
+    console.error('Image Lab error: #image-file-list was not found.')
+    return
+  }
 
+  imageFileList.innerHTML = ''
   files.forEach((file, index) => {
     const item = document.createElement('div')
     item.className = 'image-file-item'
